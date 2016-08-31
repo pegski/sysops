@@ -1,2 +1,4 @@
 build
 /env/environment.osx
+/terraform/ssh
+/terraform/.terraform

@@ -11,8 +11,67 @@ These variables can be added to env/environment.local (for all linux versions) o
  The following command can be used to load the environment in your current working shell:
  
   ```
-  source env/loadenv.sh
+  cd env; source ./loadenv.sh; cd -
   ```
+
+Additionally, you will need the ssh public and private key of the deploy user for terraform. These should be placed in terraform/ssh.
+
+## terraform state
+The statefile for terraform is saved in a dedicated S3 bucket.
+For this S3 bucket we applied the following S3 policy:
+```
+{
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Sid": "statement1",
+         "Effect": "Allow",
+         "Principal": {
+            "AWS": "arn:aws:iam::<insert-arn-number>:user/terraform-bot-account"
+         },
+         "Action": [
+            "s3:GetBucketLocation",
+            "s3:ListBucket"
+         ],
+         "Resource": [
+            "arn:aws:s3:::pegski-tfstate"
+         ]
+      },
+      {
+         "Sid": "statement2",
+         "Effect": "Allow",
+         "Principal": {
+            "AWS": "arn:aws:iam::<insert-arn-number>:user/terraform-bot-account"
+         },
+         "Action": [
+             "s3:GetObject"
+         ],
+         "Resource": [
+            "arn:aws:s3:::pegski-tfstate/*"
+         ]
+      }
+   ]
+}
+```
+
+and the inline policy for the aim user terraform-bot-account
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PermissionForObjectOperations",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::pegski-tfstate/*"
+            ]
+        }
+    ]
+}
+```
 
 
 ## deploy the infrastructure 
