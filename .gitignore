@@ -2,3 +2,5 @@ build
 /env/environment.osx
 /terraform/ssh
 /terraform/.terraform
+/terraform/*.tfstate
+/terraform/terraform.tfstate.backup

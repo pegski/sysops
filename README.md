@@ -76,25 +76,37 @@ and the inline policy for the aim user terraform-bot-account
 
 ## deploy the infrastructure 
 
-## deploy
+
+## useful commands for testing the infrastructure
+
+You can use ansible with the terraform.py script from cisco to quickly ping all created instances:
+
+```
+ansible -i bin/terraform.py/terraform.py -m ping all
+
+dockernode-02 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+haproxy-01 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+dockernode-01 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+mongodbnode-01 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+
+```
+
+## left todo:
  
- The docker host can be provisioned using:
+ create ansible hostfile
+ attach playbooks
+ refactor dockerfiles
+
  
- ```
- ansible-playbook site.yml -i hosts
- ```
- 
- You are able to add your own ssh-key and it will be deployed to the server so you can log in.
- 
- Add your ssh public key to ssh_access/files/public_keys and reference the file in ssh_access/vars/main.yml.
- 
- Deploy the keys with:
- ```
- ansible-playbook -i hosts site.yml --tags "ssh_access"
- ```
- 
- 
- After this, webski can be deployed from github by using:
- ```
- ansible-playbook -i hosts site.yml deploy/pegski.yml
- ```
