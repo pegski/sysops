@@ -1,8 +1,23 @@
 # infrastructure/sysops
 
-EC2 instance should be created manually, currently ubuntu14.04 LTS is used as base image.
+Peg.ski runs on AWS.
+
+The AWS infrastructure is maintained by Terraform. Services are being deployed using ansible.
+
+## secrets
+You will need to provide AWS credentials as environment variables in order to be able to run the scripts.
+
+These variables can be added to env/environment.local (for all linux versions) or environment.osx for OS X. 
+ The following command can be used to load the environment in your current working shell:
  
- The commands below assume you are in the sysops/ansible directory.
+  ```
+  source env/loadenv.sh
+  ```
+
+
+## deploy the infrastructure 
+
+## deploy
  
  The docker host can be provisioned using:
  
