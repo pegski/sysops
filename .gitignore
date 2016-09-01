@@ -1,6 +1,6 @@
 build
 /env/environment.osx
-/terraform/ssh
 /terraform/.terraform
 /terraform/*.tfstate
 /terraform/terraform.tfstate.backup
+/ansible/roles/docker/files/dockercfg.json

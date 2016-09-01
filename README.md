@@ -4,6 +4,18 @@ Peg.ski runs on AWS.
 
 The AWS infrastructure is maintained by Terraform. Services are being deployed using ansible.
 
+## required
+
+To be able to setup and provision the peg.ski infrastructure you need to have installed:
+
+*   terraform (> 0.7)
+*   ansible (>2.1)
+
+For creating maps of the terraformed infrastructure you will need:
+*   Graphviz (>)
+
+besides that you will need AWS AIM account credentials and the deploy user private key. 
+
 ## secrets
 You will need to provide AWS credentials as environment variables in order to be able to run the scripts.
 
@@ -102,6 +114,12 @@ mongodbnode-01 | SUCCESS => {
 }
 
 ```
+# provisioning of the hosts
+
+```
+ansible-playbook -i terraform/bin/terraform.py/terraform.py ansible/pegski.yml
+```
+
 
 ## left todo:
  

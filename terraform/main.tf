@@ -6,7 +6,7 @@ provider "aws" {
 
 resource "aws_key_pair" "terraform-deployer" {
   key_name = "${var.key_name}"
-  public_key = "${file("./ssh/terraform-deployer.pub")}"
+  public_key = "${file("~/.ssh/id_rsa.pub")}"
 }
 
 module "vpc" {

@@ -27,12 +27,11 @@ resource "aws_instance" "mongodbnodes" {
   ]
 
   subnet_id = "${var.subnet_id_zones[count.index]}"
-  user_data = "${file("${path.module}/../cloud-config/cloud-config.yml")}"
 
   tags {
-    Env   = "${var.env}"
-    Group = "mongodbnodes"
+    env   = "${var.env}"
+    role = "mongodbnodes"
     Name  = "${format("mongodbnode-%02d", count.index + 1)}"
-    sshUser = "merlijn"
+    sshUser = "ubuntu"
   }
 }

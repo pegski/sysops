@@ -34,12 +34,11 @@ resource "aws_instance" "haproxy" {
   ]
 
   subnet_id = "${var.subnet_id_zones[count.index]}"
-  user_data = "${file("${path.module}/../cloud-config/cloud-config.yml")}"
 
   tags {
-    Env   = "${var.env}"
-    Group = "haproxy"
+    env   = "${var.env}"
+    role = "loadbalancers"
     Name  = "${format("haproxy-%02d", count.index + 1)}"
-    sshUser = "merlijn"
+    sshUser = "ubuntu"
   }
 }

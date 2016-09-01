@@ -27,12 +27,11 @@ resource "aws_instance" "dockernodes" {
   ]
 
   subnet_id = "${var.subnet_id_zones[count.index]}"
-  user_data = "${file("${path.module}/../cloud-config/cloud-config.yml")}"
 
   tags {
-    Env   = "${var.env}"
-    Group = "dockernode"
+    env   = "${var.env}"
+    role = "dockernodes"
     Name  = "${format("dockernode-%02d", count.index + 1)}"
-    sshUser = "merlijn"
+    sshUser = "ubuntu"
   }
 }

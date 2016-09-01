@@ -9,7 +9,7 @@ variable "secret_key" {
 # the name of the AWS keypair
 variable "key_name" {
   type    = "string"
-  default = "terraform-deployer"
+  default = "merlijn"
 }
 
 # path to the local public key of the AWS keypair

@@ -1,0 +1,12 @@
+- hosts: "role=dockernodes:role=loadbalancers"
+  become: yes
+  roles:
+    - {role: base, tags: ['base']}
+    - {role: ssh_access, tags: ['ssh_access']}
+    - {role: docker, tags: ['docker']}
+
+- hosts: "role=mongodbnodes"
+  become: yes
+  roles:
+    - {role: base, tags: ['base']}
+    - {role: ssh_access, tags: ['ssh_access']}
