@@ -116,6 +116,8 @@ mongodbnode-01 | SUCCESS => {
 ```
 # provisioning of the hosts
 
+All the hosts can be provisioned using: 
+
 ```
 ansible-playbook -i terraform/bin/terraform.py/terraform.py ansible/pegski.yml
 ```
@@ -123,8 +125,13 @@ ansible-playbook -i terraform/bin/terraform.py/terraform.py ansible/pegski.yml
 
 ## left todo:
  
- create ansible hostfile
- attach playbooks
- refactor dockerfiles
-
+ * create ansible playbook for provisioning mongodb
+ * setup memcached 
+ * refactor dockerfiles
+    * files should be loaded in docker container
+    * switch from nginx to apache to allow env variables
+    * adjust SF3 configuration to use env variables for configuration
+    * update SF3 mongodb settings to use dedicated mongodb instance 
+ * setup jenkins to listen for github webhook to run tests and deploy
+ * add basic monitoring
  
