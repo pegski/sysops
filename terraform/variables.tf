@@ -6,13 +6,14 @@ variable "secret_key" {
   type = "string"
 }
 
-# the name of the AWS keypair
+# the name of the AWS keypair (will be created in ec2), make sure you own the
+# private key of this keypar
 variable "key_name" {
   type    = "string"
   default = "merlijn"
 }
 
-# path to the local public key of the AWS keypair
+# path to the local public key of the AWS keypair which will be uploaded to ec2
 variable "public_key_path" {
   type    = "string"
 }

@@ -10,3 +10,4 @@
   roles:
     - {role: base, tags: ['base']}
     - {role: ssh_access, tags: ['ssh_access']}
+    - {role: mongodb, tags: ['mongodb']}

@@ -1,6 +1,16 @@
+# make build direcotories
 build
+
+# local environment files, which contain secrets
 /env/environment.osx
+
+# temporary local terraform
 /terraform/.terraform
 /terraform/*.tfstate
 /terraform/terraform.tfstate.backup
+
+# docker configuration file, contains secrets
 /ansible/roles/docker/files/dockercfg.json
+
+# failed ansible playbooks
+*.retry

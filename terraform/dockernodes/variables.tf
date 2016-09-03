@@ -28,5 +28,5 @@ variable "zones" {
 
 variable "dockernode_count" {
   type    = "string"
-  default = "1"
+  default = "2"
 }

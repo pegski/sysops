@@ -114,6 +114,19 @@ mongodbnode-01 | SUCCESS => {
 }
 
 ```
+
+# destroying the infrastructure
+(be carefull ;)
+If you want to destroy the infrasctructure, use:
+```
+make destroy
+```
+The command will wipe the complete infrastructure. You can also be more specific. If you want for example to create new dockerhosts, you can use:
+```
+terraform destroy --target module.mongodbnodes.aws_instance.dockernodes
+```
+
+
 # provisioning of the hosts
 
 All the hosts can be provisioned using: 
@@ -122,10 +135,15 @@ All the hosts can be provisioned using:
 ansible-playbook -i terraform/bin/terraform.py/terraform.py ansible/pegski.yml
 ```
 
+There also the possibility to be more specific:
+
+```
+ ansible-playbook -i terraform/bin/terraform.py/terraform.py ansible/pegski.yml --limit "role=dockernodes"
+```
 
 ## left todo:
  
- * create ansible playbook for provisioning mongodb
+ * fix security groups, permissions are to wide now while dockernodes cannot access mongodb 
  * setup memcached 
  * refactor dockerfiles
     * files should be loaded in docker container

@@ -1,0 +1,24 @@
+# This is a very basic playbook for installing mongodb.
+# If we want something more advanced, we might consider using
+# https://github.com/UnderGreen/ansible-role-mongodb
+---
+- name: import the public key used by the package management system
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=EA312927 state=present
+
+- name: add MongoDB repository
+  apt_repository: repo='deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse' state=present
+
+- name: set correct (advised by mongodb) kernelsettings
+  copy:
+    src: mongo_vm_settings.conf
+    dest: "/etc/init/mongod_vm_settings.conf"
+
+- name: install mongodb
+  apt: pkg=mongodb-org state=latest update_cache=yes
+  notify:
+  - start mongodb
+
+- name: check if mongodb is running and accepting connections
+  wait_for:
+    port:  27017
+    timeout: 10
