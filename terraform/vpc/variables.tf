@@ -20,9 +20,10 @@ variable "cidr_blocks" {
 }
 
 # 82.75.14.60/32 merlijn
-# 37.44.9.70/32 temp. work space for merlijn
+# 37.44.9.70/32 merlijn, work
+# 188.203.210.214/32 merlijn, swimmingpool
 variable "whitelisted_cidrs" {
   type        = "string"
-  default     = "82.75.14.60/32,37.44.9.70/32"
+  default     = "82.75.14.60/32,37.44.9.70/32,188.203.210.214/32"
   description = "Comma-separated list of cidr blocks"
 }

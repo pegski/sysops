@@ -25,7 +25,7 @@ variable "region" {
 
 variable "env" {
   type        = "string"
-  default     = "dev"
+  default     = "prod"
   description = "The environment of this infrastructure. Choose from dev, acc and prod"
 }
 
