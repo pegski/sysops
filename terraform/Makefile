@@ -32,6 +32,16 @@ graph:
 show:
 	terraform show
 
+output:
+	@echo "*** DOCKERNODES ***"
+	@terraform output --module=dockernodes
+	@echo "*** LOADBALANCERS ***"
+	@terraform output --module=loadbalancers
+	@echo "*** MONGONODES *** "
+	@terraform output --module=mongodbnodes
+	@echo "*** VPC ***"
+	@terraform output --module=vpc
+
 clean:
 	terraform destroy
 	rm -rf $(CURDIR)/.terraform
