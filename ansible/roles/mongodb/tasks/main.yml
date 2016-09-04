@@ -13,6 +13,13 @@
     src: mongo_vm_settings.conf
     dest: "/etc/init/mongod_vm_settings.conf"
 
+- name: load custom config file to allow incoming traffic
+  template:
+    src: templates/mongod.conf.j2
+    dest: "/etc/mongod.conf"
+  notify:
+  - start mongodb
+
 - name: install mongodb
   apt: pkg=mongodb-org state=latest update_cache=yes
   notify:
