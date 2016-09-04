@@ -11,5 +11,5 @@ output "public ip" {
 }
 
 output "private ip" {
-  value = "${aws_instance.haproxy.public_ip}"
+  value = "${aws_instance.haproxy.private_ip}"
 }
