@@ -16,7 +16,24 @@
     - curl
 
 - name: install nl_NL.UTF-8 locale
-  shell: locale-gen nl_NL.UTF-8
+  locale_gen:
+    name=nl_NL.UTF-8
+    state=present
+  notify: dpkg-reconfigure locales
+
+- name: Set LC_LANG
+  lineinfile:
+    dest=/etc/environment
+    state=present
+    regexp='^LC_LANG'
+    line='LC_LANG="nl_NL.UTF-8"'
+
+- name: Set LC_ALL
+  lineinfile:
+    dest=/etc/environment
+    state=present
+    regexp='^LC_ALL'
+    line='LC_ALL="nl_NL.UTF-8"'
 
 - name: set timezone to UTC
   when: ansible_date_time.tz != 'UTC'

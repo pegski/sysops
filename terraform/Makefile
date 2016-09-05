@@ -42,6 +42,9 @@ output:
 	@echo "*** VPC ***"
 	@terraform output --module=vpc
 
+ping:
+	ansible -i bin/terraform.py/terraform.py -m ping all
+
 clean:
 	terraform destroy
 	rm -rf $(CURDIR)/.terraform

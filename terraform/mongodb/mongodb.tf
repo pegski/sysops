@@ -7,10 +7,8 @@ resource "aws_security_group" "mongodb" {
     from_port = 27017
     to_port   = 27017
     protocol  = "tcp"
-    self      = true
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${var.vpc_private_cidr}"]
   }
-
 }
 
 resource "aws_instance" "mongodbnodes" {

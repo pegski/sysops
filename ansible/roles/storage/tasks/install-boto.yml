@@ -1,0 +1,20 @@
+- name: python pip and boto
+  apt:
+    name={{ item }}
+    update_cache=yes
+  with_items:
+    - python-boto
+    - python-pip
+
+- name: ensure pip is properly installed
+  easy_install: name=pip
+
+- name: update pip to latest version
+  pip:
+   name=pip
+   state=latest
+
+- name: update boto to latest version
+  pip:
+   name=boto
+   state=latest

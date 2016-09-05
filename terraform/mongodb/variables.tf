@@ -4,6 +4,7 @@ variable "key_name" {}
 
 variable "vpc_id" {}
 variable "default_sg_id" {}
+variable "vpc_private_cidr" {}
 variable "subnet_id_zones" {
   type = "list"
 }

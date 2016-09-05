@@ -1,2 +1,5 @@
 - name: restart NTP daemon
   service: name=ntp state=restarted
+
+- name: dpkg-reconfigure locales
+  command: /usr/sbin/dpkg-reconfigure --frontend noninteractive locales

@@ -1,0 +1,39 @@
+---
+- name: check if mount already exist
+  shell: df -h | grep xvdf1
+  register: mount_exist
+  ignore_errors: True
+
+- name: Display all variables/facts known for a host
+  debug: var=hostvars[inventory_hostname] verbosity=1
+
+- name: ensure that external EBS volume exists and is attached to the instance
+  ec2_vol:
+    instance: "{{ hostvars[inventory_hostname].id }}"
+    volume_size: 50
+    volume_type: gp2
+    device_name: /dev/xvdf
+    state: present
+    region: "{{ aws.region }}"
+    encrypted: yes
+    aws_access_key: "{{ aws.access_key }}"
+    aws_secret_key: "{{ aws.secret_key }}"
+
+- name: hack fdisk with echo commands
+  shell: (echo n; echo; echo; echo; echo; echo w) | fdisk /dev/xvdf
+  when: mount_exist.stdout.find("xvdf1") < 1
+
+- name: create a ext4 filesystem on /dev/xvdf1
+  filesystem:
+    fstype: ext4
+    dev: /dev/xvdf1
+  when: mount_exist.stdout.find("xvdf1") < 1
+
+- name: mount our new disk
+  mount:
+    name: /persistent_storage
+    src: /dev/xvdf1
+    fstype: ext4
+    opts: noatime
+    state: mounted
+  when: mount_exist.stdout.find("xvdf1") < 1

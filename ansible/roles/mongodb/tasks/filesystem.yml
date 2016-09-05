@@ -1,0 +1,49 @@
+---
+- name: create persistent storage directory
+  file:
+    dest=/persistent_storage/mongodb
+    state=directory
+    recurse=true
+    owner=mongodb
+    group=mongodb
+    mode=755
+
+- name: create subdirectories for mongodb within persistent storage directory
+  file:
+    dest=/persistent_storage/mongodb/{{ item }}
+    state=directory
+    recurse=true
+    owner=mongodb
+    group=mongodb
+    mode=755
+  with_items:
+    - log
+    - data
+
+- name: create journal subdirectory
+  file:
+    dest=/persistent_storage/mongodb/data/journal
+    state=directory
+    recurse=true
+    owner=mongodb
+    group=mongodb
+    mode=755
+
+- name: create symobolic link for /journal
+  file:
+    src=/persistent_storage/mongodb/data/journal
+    dest=/persistent_storage/mongodb/journal
+    owner=mongodb
+    group=mongodb
+    state=link
+
+- name: adjust ulimits for mongodb
+  copy:
+    src: 90-mongodb.conf
+    dest: "/etc/security/limits.d/90-mongodb.conf"
+
+- name: set udev config for mongodb
+  copy:
+    src: 85-ebs.rules
+    dest: "/etc/udev/rules.d/85-ebs.rules"
+

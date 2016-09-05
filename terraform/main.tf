@@ -49,7 +49,8 @@ module "mongodbnodes" {
   zones           = "${var.zones}"
   key_name        = "${aws_key_pair.terraform-deployer.id}"
 
-  vpc_id          = "${module.vpc.vpc_id}"
-  default_sg_id   = "${module.vpc.default_sg_id}"
-  subnet_id_zones = "${module.vpc.subnet_id_zones}"
+  vpc_id           = "${module.vpc.vpc_id}"
+  vpc_private_cidr = "${module.vpc.vpc_private_cidr}"
+  default_sg_id    = "${module.vpc.default_sg_id}"
+  subnet_id_zones  = "${module.vpc.subnet_id_zones}"
 }
