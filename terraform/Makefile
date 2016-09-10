@@ -33,14 +33,16 @@ show:
 	terraform show
 
 output:
-	@echo "*** DOCKERNODES ***"
+	@echo "\n*** DOCKERNODES ***"
 	@terraform output --module=dockernodes
-	@echo "*** LOADBALANCERS ***"
+	@echo "\n*** LOADBALANCERS ***"
 	@terraform output --module=loadbalancers
-	@echo "*** MONGONODES *** "
+	@echo "\n*** MONGONODES *** "
 	@terraform output --module=mongodbnodes
-	@echo "*** VPC ***"
+	@echo "\n*** VPC ***"
 	@terraform output --module=vpc
+	@echo "\n*** Redis ***"
+	@terraform output --module=rediscluster
 
 ping:
 	ansible -i bin/terraform.py/terraform.py -m ping all

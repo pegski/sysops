@@ -88,6 +88,13 @@ and the inline policy for the aim user terraform-bot-account
 
 ## deploy the infrastructure 
 
+Ensure the environment variables are loaded in your terminal sessions and that you are in the terraform directory.
+Then simply type:
+```
+make apply
+```
+
+Warning: creating the redis cluster can take a significant amount of time (> 5 minutes). Just be patient and let it finish.
 
 ## useful commands for testing the infrastructure
 

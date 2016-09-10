@@ -54,3 +54,19 @@ module "mongodbnodes" {
   default_sg_id    = "${module.vpc.default_sg_id}"
   subnet_id_zones  = "${module.vpc.subnet_id_zones}"
 }
+
+module "rediscluster" {
+  source = "./redis"
+
+  env              = "${var.env}"
+  region           = "${var.region}"
+  vpc_id           = "${module.vpc.vpc_id}"
+  vpc_private_cidr = "${module.vpc.vpc_private_cidr}"
+  subnet_id_zones  = "${module.vpc.subnet_id_zones}"
+
+  cache_name = "redis-cache"
+  engine_version = "2.8.22"
+  instance_type = "cache.t2.micro"
+  maintenance_window = "sun:05:00-sun:06:00"
+
+}
